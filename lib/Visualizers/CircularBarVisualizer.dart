@@ -9,7 +9,7 @@ import 'package:vector_math/vector_math_64.dart';
 class CircularBarVisualizer extends CustomPainter {
 
   final List<int> waveData;
-  Float32List points;
+  late Float32List points;
   final double height;
   final double width;
   final Color color;
@@ -19,10 +19,10 @@ class CircularBarVisualizer extends CustomPainter {
   double radius = -1;
 
   CircularBarVisualizer({
-    @required this.waveData,
-    @required this.height,
-    @required this.width,
-    @required this.color,
+    required this.waveData,
+    required this.height,
+    required this.width,
+    required this.color,
     this.density = 100,
     this.gap = 2
   }) : wavePaint = new Paint()

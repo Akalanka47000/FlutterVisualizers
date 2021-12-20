@@ -3,20 +3,16 @@ import 'package:flutter_visualizers/callbacks.dart';
 import 'package:flutter_visualizers/flutter_visualizers.dart';
 
 class Visualizer extends StatefulWidget {
-
   final Function(BuildContext context, List<int> fft) builder;
   int id;
-  Visualizer({
-    this.builder, this.id
-  });
+  Visualizer({required this.builder, required this.id});
 
   @override
   _VisualizerState createState() => new _VisualizerState();
 }
 
 class _VisualizerState extends State<Visualizer> {
-
-  AudioVisualizer visualizer;
+  late AudioVisualizer visualizer;
   List<int> fft = const [];
   @override
   void initState() {
@@ -26,8 +22,8 @@ class _VisualizerState extends State<Visualizer> {
       ..addListener(
           waveformCallback: (List<int> samples) {
             setState(() => fft = samples);
-          }
-      );
+          },
+          fftCallback: (List<int> fftSamples) {});
   }
 
   @override

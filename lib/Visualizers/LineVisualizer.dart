@@ -11,15 +11,15 @@ class LineVisualizer extends CustomPainter {
   final double width;
   final Color color;
   final Paint wavePaint;
-  Float32List points;
-  Rect rect;
+  late Float32List points;
+  late Rect rect;
   final double strokeWidth ;
 
   LineVisualizer({
-    @required this.waveData,
-    @required this.height,
-    @required this.width,
-    @required this.color,
+    required this.waveData,
+    required this.height,
+    required this.width,
+    required this.color,
     this.strokeWidth = 0.005
   }) : wavePaint = new Paint()
     ..color = color.withOpacity(1.0)

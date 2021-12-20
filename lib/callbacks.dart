@@ -1,16 +1,14 @@
 import 'package:flutter/services.dart';
 
 class AudioVisualizer {
-
   final MethodChannel channel;
   final Set<FftCallback> _fftCallbacks = new Set();
   final Set<WaveformCallback> _waveformCallbacks = new Set();
 
   AudioVisualizer({
-    this.channel,
+    required this.channel,
   }) {
-    channel.setMethodCallHandler((MethodCall call) {
-
+    channel.setMethodCallHandler((call) {
       switch (call.method) {
         case 'onFftVisualization':
           List<int> samples = call.arguments['fft'];
@@ -25,13 +23,17 @@ class AudioVisualizer {
           }
           break;
         default:
-          throw new UnimplementedError('${call.method} is not implemented for audio visualization channel.');
+          throw new UnimplementedError(
+              '${call.method} is not implemented for audio visualization channel.');
       }
+
+      return Future.value(call.method);
     });
   }
   void activate(int sessionID) {
     print(sessionID);
-    channel.invokeMethod('audiovisualizer/activate_visualizer' , {"sessionID":sessionID});
+    channel.invokeMethod(
+        'audiovisualizer/activate_visualizer', {"sessionID": sessionID});
   }
 
   void deactivate() {
@@ -45,8 +47,8 @@ class AudioVisualizer {
   }
 
   void addListener({
-    FftCallback fftCallback,
-    WaveformCallback waveformCallback,
+    required FftCallback fftCallback,
+    required WaveformCallback waveformCallback,
   }) {
     if (null != fftCallback) {
       _fftCallbacks.add(fftCallback);
@@ -57,8 +59,8 @@ class AudioVisualizer {
   }
 
   void removeListener({
-    FftCallback fftCallback,
-    WaveformCallback waveformCallback,
+    required FftCallback fftCallback,
+    required WaveformCallback waveformCallback,
   }) {
     if (null != fftCallback) {
       _fftCallbacks.remove(fftCallback);
@@ -67,7 +69,6 @@ class AudioVisualizer {
       _waveformCallbacks.remove(waveformCallback);
     }
   }
-
 }
 
 typedef void FftCallback(List<int> fftSamples);
