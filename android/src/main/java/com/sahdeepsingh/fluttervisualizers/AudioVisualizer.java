@@ -1,9 +1,10 @@
 package com.sahdeepsingh.fluttervisualizers;
 
+import io.flutter.embedding.android.FlutterActivity;
 import android.media.audiofx.Visualizer;
 import android.os.Build;
 
-public class AudioVisualizer {
+public class AudioVisualizer extends FlutterActivity{
 
     public static final AudioVisualizer instance = new AudioVisualizer();
 

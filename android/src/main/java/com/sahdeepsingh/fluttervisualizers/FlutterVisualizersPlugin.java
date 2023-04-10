@@ -5,6 +5,7 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.audiofx.Visualizer;
 import android.os.Build;
+import androidx.annotation.NonNull;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -14,6 +15,7 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
@@ -21,9 +23,19 @@ import io.flutter.plugin.common.MethodChannel.Result;
 import io.flutter.plugin.common.PluginRegistry.Registrar;
 
 /** FlutterVisualizersPlugin */
-public class FlutterVisualizersPlugin {
+public class FlutterVisualizersPlugin implements FlutterPlugin {
     private static final Pattern VISUALIZER_METHOD_NAME_MATCH = Pattern.compile("audiovisualizer/([^/]+)");
     private static MethodChannel visualizerChannel;
+
+    @Override
+    public void onAttachedToEngine(@NonNull FlutterPluginBinding binding) {
+      // TODO: your plugin is now attached to a Flutter experience.
+    }
+
+    @Override
+    public void onDetachedFromEngine(@NonNull FlutterPluginBinding binding) {
+      // TODO: your plugin is no longer attached to a Flutter experience.
+    }
 
     /** Plugin registration. */
   public static void registerWith(Registrar registrar) {
